@@ -1,0 +1,1 @@
+https://github.com/deepmind/strict/blob/master/strict.lua
