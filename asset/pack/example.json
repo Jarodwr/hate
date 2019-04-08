@@ -1,0 +1,10 @@
+{
+	"audio": [],
+	"image": [
+		{
+			"offset": {"x": 0, "y": 0},
+			"path": "example/path",
+			"alias": ""
+		}
+	]
+}
