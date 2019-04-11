@@ -23,6 +23,7 @@ style guide:
 - classes: PascalCase
 - private variables: __snake_case
 - ini is for configs (likely should just apply to the global config.json)
+- xml for spritesheet quads
 - json is for data files
 
 game configs are stored in config.ini

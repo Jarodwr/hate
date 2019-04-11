@@ -1,11 +1,9 @@
 local flux = library "flux"
 
-local name = "tween"
-
 return function()
 	local group = flux.group()
 
-	return name, setmetatable(
+	return "tween", setmetatable(
 		{},
 		{
 			__call = function(self, ...)

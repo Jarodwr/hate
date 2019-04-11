@@ -1,11 +1,9 @@
 local tick = library "tick"
 
-local name = "timer"
-
 return function()
 	local group = tick.group()
 
-	return name, setmetatable(
+	return "timer", setmetatable(
 		{},
 		{
 			__call = function(self, ...)

@@ -32,9 +32,12 @@ function hate.state.action(name, ...)
 
 	-- Call everything in the services
 	for _, service in ipairs(current.__services) do
-		local callbacks = getmetatable(service).__callbacks
-		if (callbacks[name]) then
-			callbacks[name](...)
+		local services_mt = getmetatable(service)
+		if services_mt and services_mt.__callbacks then
+			local callbacks = getmetatable(service).__callbacks
+			if (callbacks[name]) then
+				callbacks[name](...)
+			end
 		end
 	end
 
