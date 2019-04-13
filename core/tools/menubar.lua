@@ -1,4 +1,4 @@
-local windows = require("tools").windows
+local windows = require("core.tools").windows
 
 return function()
 	if imgui.BeginMainMenuBar() then

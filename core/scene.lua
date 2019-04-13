@@ -6,7 +6,7 @@ end
 
 Scene.services = {}
 
-for _, callback in ipairs(require "utility.callbacks") do
+for _, callback in ipairs(require "core.callbacks") do
 	Scene[callback] = function()
 	end
 end

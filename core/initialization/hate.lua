@@ -2,7 +2,7 @@
 -- without interfering with other callback handling functionality.
 hate.state.push(require(config.scene.entry))
 
-for _, callback in ipairs(require "utility.callbacks") do
+for _, callback in ipairs(require("core.callbacks")) do
 	-- Save the old callback so we don't completely overwrite it
 	local old = love[callback]
 	if old then

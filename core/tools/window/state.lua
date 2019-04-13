@@ -1,4 +1,4 @@
-local StateWindow = extends "tools.window"
+local StateWindow = extends "core.tools.window"
 
 function StateWindow:new()
 	self.super.new(self)

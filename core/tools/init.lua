@@ -4,7 +4,7 @@ require "imgui"
 -- local tools_state = {windows = require("tools.window")()}
 
 local main = {} -- Store original callbacks
-for k, v in ipairs(require("utility.callbacks")) do
+for k, v in ipairs(require("core.callbacks")) do
 	main[v] = love[v] or function()
 		end
 end
@@ -24,7 +24,7 @@ end
 function love.draw()
 	main.draw()
 	if debugMode then
-		require("tools.main")()
+		require("core.tools.main")()
 		imgui.Render()
 	end
 end
@@ -98,7 +98,7 @@ end
 
 -- Access state as module
 local tools_state = {windows = {}}
-local window_directory = "tools.window"
+local window_directory = "core.tools.window"
 for _, name in ipairs({"state"}) do
 	tools_state.windows[name] = require(window_directory .. "." .. name)()
 end

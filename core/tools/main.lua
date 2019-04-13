@@ -1,5 +1,4 @@
-local tools = require("tools")
-local menubar = require("tools.menubar")
+local menubar = require("core.tools.menubar")
 
 local showTestWindow = false
 local floatValue = 0
