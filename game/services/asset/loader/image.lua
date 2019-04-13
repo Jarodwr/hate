@@ -1,3 +1,8 @@
+-- Initialize
+local draw = love.graphics.draw
+local newQuad = love.graphics.newQuad
+local newImage = love.graphics.newImage
+
 local xml_loader = require((...):match("(.-)[^%/%.]+$") .. "xml")
 --[[
 	Q:	What is the purpose of creating this interface for drawing sprites?
@@ -9,13 +14,13 @@ local sprite_mt = {}
 sprite_mt.__index = {}
 
 function sprite_mt.__index:draw(...)
-	love.graphics.draw(self.image, self.quad, ...)
+	draw(self.image, self.quad, ...)
 end
 
-local function sprite(image, quad)
+local function newSprite(image, quad)
 	local instance = {}
 	instance.image = image
-	instance.quad = quad or love.graphics.newQuad(0, 0, sw, sh, sw, sh)
+	instance.quad = quad or newQuad(0, 0, sw, sh, sw, sh)
 	return setmetatable(instance, sprite_mt)
 end
 
@@ -26,7 +31,7 @@ local function parse_sheet(image, sw, sh, node)
 	if node.quad then
 		for _, quad in ipairs(node.quad) do
 			collection[quad._attr.key] =
-				sprite(image, love.graphics.newQuad(quad._attr.x, quad._attr.y, quad._attr.w, quad._attr.h, sw, sh))
+				newSprite(image, newQuad(quad._attr.x, quad._attr.y, quad._attr.w, quad._attr.h, sw, sh))
 		end
 	end
 
@@ -40,7 +45,7 @@ local function parse_sheet(image, sw, sh, node)
 end
 
 local function image_loader(path)
-	local image = love.graphics.newImage(path)
+	local image = newImage(path)
 	local sw, sh = image:getWidth(), image:getHeight()
 	local spritesheet_xml = xml_loader(path:match("(.-)[^%/%.]+$") .. "xml")
 	if spritesheet_xml then
@@ -48,7 +53,7 @@ local function image_loader(path)
 		return parse_sheet(image, sw, sh, spritesheet_xml.root.quad_definitions)
 	else
 		-- Return a default sprite with a quad that covers the whole image
-		return sprite(image, love.graphics.newQuad(0, 0, sw, sh, sw, sh))
+		return newSprite(image, newQuad(0, 0, sw, sh, sw, sh))
 	end
 end
 
