@@ -2,6 +2,9 @@ local function access_error(tbl, index)
 	error("Attempted to set index: " .. index)
 end
 
+---@generic T
+---@param tbl T
+---@return T
 local function make_immutable(tbl)
 	assert(type(tbl) == "table", "can only make tables immutable")
 	return setmetatable(

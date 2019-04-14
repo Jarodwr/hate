@@ -71,6 +71,9 @@ local function merge_sort(array, workspace, low, high, goes_before)
 	end
 end
 
+---@generic T
+---@param array T[]
+---@param goes_before fun(a:T, b:T):boolean
 local function stable_sort(array, goes_before)
 	local n = #array
 	if n < 2 then

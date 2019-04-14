@@ -1,7 +1,9 @@
 local state = require "core.state"
 
+---@class SceneService
 local SceneService = extends "object"
 
+---@private
 function SceneService:__error_on_overqueuing()
 	assert(
 		self.queued ~= nil,
@@ -9,26 +11,39 @@ function SceneService:__error_on_overqueuing()
 	)
 end
 
+---@public
+---@return void
 function SceneService:pop()
 	self:__error_on_overqueuing()
 	self.queued = {action = "pop"}
 end
 
-function SceneService:push(scene)
+---@public
+---@param scene_type Scene
+---@return void
+function SceneService:push(scene_type)
 	self:__error_on_overqueuing()
-	self.queued = {action = "push", scene = scene}
+	self.queued = {action = "push", scene = scene_type}
 end
 
-function SceneService:change(scene)
+---@public
+---@param scene_type Scene
+---@return void
+function SceneService:change(scene_type)
 	self:__error_on_overqueuing()
-	self.queued = {action = "change", scene = scene}
+	self.queued = {action = "change", scene = scene_type}
 end
 
+---@public
+---@param name string
+---@return void
 function SceneService:stack(name)
 	self:__error_on_overqueuing()
 	self.queued = {action = "stack", name = name}
 end
 
+---@public
+---@return void
 function SceneService:reset()
 	self:__error_on_overqueuing()
 	self.queued = {action = "reset"}
@@ -55,6 +70,7 @@ function Callbacks:post_action()
 	end
 end
 
+---@private
 SceneService.__callbacks = Callbacks
 
 return SceneService

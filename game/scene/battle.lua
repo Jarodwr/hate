@@ -20,6 +20,7 @@ BattleScene.services = {
 
 function BattleScene:new()
 	self.asset_service = inject(AssetService)
+	self.input_service = inject(InputService)
 end
 
 function BattleScene:update(dt)

@@ -22,6 +22,11 @@ local function recursive_copy(value, index)
 	return copy
 end
 
-return function(object)
+---@generic T
+---@param object T
+---@return T
+local function deep_copy(object)
 	return recursive_copy(object, {})
 end
+
+return deep_copy

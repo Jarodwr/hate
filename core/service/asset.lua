@@ -5,8 +5,10 @@ local image_loader = require(cd .. "loader.image")
 
 local ipairs, assert = ipairs, assert
 
+---@class AssetService
 local AssetService = extends "object"
 
+---@private
 function AssetService:new()
 	self.__manager = cargo.init {
 		dir = "asset",
@@ -18,6 +20,8 @@ function AssetService:new()
 	}
 end
 
+---@param ... string[]
+---@return Sprite
 function AssetService:image(...)
 	local asset = self.__manager
 	for _, path in ipairs {...} do
@@ -27,6 +31,7 @@ function AssetService:image(...)
 	return asset
 end
 
+---@param ... string[]
 function AssetService:audio(...)
 	local asset = self.__manager
 	for _, path in ipairs {...} do
