@@ -19,11 +19,11 @@ return function()
 		showTestWindow = imgui.ShowDemoWindow(true)
 	end
 
-	for name, window in pairs(tools.windows) do
-		if window.enabled then
-			imgui.Begin(name)
-			window:draw()
-			imgui.End(name)
-		end
-	end
+	-- for name, window in pairs(requiretools.window) do
+	-- 	if window.enabled then
+	-- 		imgui.Begin(name)
+	-- 		window:draw()
+	-- 		imgui.End(name)
+	-- 	end
+	-- end
 end

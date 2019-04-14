@@ -8,11 +8,16 @@ local function initialize(class, ...)
 	instance.__services = {}
 
 	--initialize services
-	for _, initializer in ipairs(class.services) do
-		local name, service = initializer()
-		instance.__services[name] = service
-		-- Used for iteration
-		table.insert(instance.__services, service)
+	local scene_class = class
+	--Initialize all of the services in base classes as well
+	while scene_class ~= nil do
+		for _, initializer in ipairs(scene_class.services or {}) do
+			local name, service = initializer()
+			instance.__services[name] = service
+			-- Used for iteration
+			table.insert(instance.__services, service)
+		end
+		scene_class = getmetatable(scene_class)
 	end
 
 	return instance

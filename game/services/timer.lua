@@ -1,19 +1,25 @@
 local tick = library "tick"
 
-return function()
+local function TimerService()
 	local group = tick.group()
 
 	return "timer", setmetatable(
-		{},
 		{
-			__call = function(self, ...)
-				return group.delay(group, ...)
+			delay = function(...)
+				return group:delay(...)
 			end,
+			recur = function(...)
+				return group:recur(...)
+			end
+		},
+		{
 			__callbacks = {
 				update = function(dt)
-					group.update(group, dt)
+					group:update(dt)
 				end
 			}
 		}
 	)
 end
+
+return TimerService

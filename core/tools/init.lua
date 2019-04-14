@@ -46,7 +46,7 @@ function love.textinput(t, ...)
 end
 
 function love.keypressed(key, ...)
-	if key == config.debugKey then
+	if key == config.debug.activationkey then
 		debugMode = not debugMode
 	end
 	imgui.KeyPressed(key)

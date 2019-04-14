@@ -3,7 +3,7 @@ local cd = (...) .. "."
 
 local image_loader = require(cd .. "loader.image")
 
-return function()
+local function AssetService()
 	local manager =
 		cargo.init(
 		{
@@ -36,3 +36,5 @@ return function()
 		audio = default_asset_getter
 	}
 end
+
+return AssetService
