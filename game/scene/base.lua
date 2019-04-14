@@ -1,7 +1,7 @@
+local SceneService = require "core.service.scene"
 local TimerService = require "core.service.timer"
 local TweenService = require "core.service.tween"
 local AssetService = require "core.service.asset"
-local SceneService = require "core.service.scene"
 
 local DefaultScene = extends "core.scene"
 
