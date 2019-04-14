@@ -22,25 +22,27 @@ function SceneService:reset()
 	self.queued = {action = "reset"}
 end
 
-SceneService.callbacks = {
-	post_action = function()
-		if self.queued then
-			if self.queued.action == "pop" then
-				state.pop()
-			elseif self.queued.action == "push" then
-				state.push(self.queued.scene)
-			elseif self.queued.action == "change" then
-				state.change(self.queued.scene)
-			elseif self.queued.action == "stack" then
-				state.stack(self.queued.name)
-			elseif self.queued.action == "reset" then
-				state.stack(self.queued.scene)
-			else
-				error "INVALID STATE MANAGEMENT ACTION"
-			end
-			self.queued = nil
+local Callbacks = {}
+
+function Callbacks:post_action()
+	if self.queued then
+		if self.queued.action == "pop" then
+			state.pop()
+		elseif self.queued.action == "push" then
+			state.push(self.queued.scene)
+		elseif self.queued.action == "change" then
+			state.change(self.queued.scene)
+		elseif self.queued.action == "stack" then
+			state.stack(self.queued.name)
+		elseif self.queued.action == "reset" then
+			state.stack(self.queued.scene)
+		else
+			error "INVALID STATE MANAGEMENT ACTION"
 		end
+		self.queued = nil
 	end
-}
+end
+
+SceneService.__callbacks = Callbacks
 
 return SceneService

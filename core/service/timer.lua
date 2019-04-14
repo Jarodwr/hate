@@ -1,25 +1,25 @@
 local tick = library "tick"
 
-local function TimerService()
-	local group = tick.group()
+local TimerService = extends "object"
 
-	return setmetatable(
-		{
-			delay = function(...)
-				return group:delay(...)
-			end,
-			recur = function(...)
-				return group:recur(...)
-			end
-		},
-		{
-			__callbacks = {
-				pre_update = function(dt)
-					group:update(dt)
-				end
-			}
-		}
-	)
+function TimerService:new()
+	self.__group = tick.group()
 end
+
+function TimerService:delay(...)
+	return self.__group:delay(...)
+end
+
+function TimerService:recur(...)
+	return self.__group:recur(...)
+end
+
+local Callbacks = {}
+
+function Callbacks:pre_update(dt)
+	return self.__group:update(dt)
+end
+
+TimerService.__callbacks = Callbacks
 
 return TimerService

@@ -1,4 +1,3 @@
-local function PhysicsService()
-	return {}
-end
+local PhysicsService = extends "object"
+
 return PhysicsService

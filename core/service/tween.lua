@@ -1,21 +1,21 @@
 local flux = library "flux"
 
-local function TweenService()
-	local group = flux.group()
+local TweenService = extends "object"
 
-	return setmetatable(
-		{},
-		{
-			__call = function(self, ...)
-				return group:to(...)
-			end,
-			__callbacks = {
-				pre_update = function(dt)
-					group:update(dt)
-				end
-			}
-		}
-	)
+function TweenService:new()
+	self.__group = flux.group()
 end
+
+function TweenService:tween(...)
+	return self.__group:to(...)
+end
+
+local Callbacks = {}
+
+function Callbacks:pre_update(dt)
+	self.__group:update(dt)
+end
+
+TweenService.__callbacks = Callbacks
 
 return TweenService

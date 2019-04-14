@@ -1,35 +1,33 @@
 local baton = library "baton"
 
---Service helper for getting configured inputs and encapsulating some baton behaviours
-local function InputService(mapping)
-	--Return an initializer function that is set to the new button mapping
-	return function()
-		local baton_instance = baton.new(mapping)
-		return setmetatable(
-			{
-				get = function(...)
-					return baton_instance:get(...)
-				end,
-				down = function(...)
-					return baton_instance:down(...)
-				end,
-				pressed = function(...)
-					return baton_instance:pressed(...)
-				end,
-				released = function(...)
-					return baton_instance:released(...)
-				end
-			},
-			{
-				__callbacks = {
-					pre_update = function(dt)
-						baton_instance:update(dt)
-					end
-				}
-			}
-		)
-	end
+local InputService = extends "object"
+
+function InputService:new(mapping)
+	self.__baton = baton.new(mapping)
 end
 
+function InputService:get(...)
+	return self.__baton:get(...)
+end
+
+function InputService:down(...)
+	return self.__baton:down(...)
+end
+
+function InputService:pressed(...)
+	return self.__baton:pressed(...)
+end
+
+function InputService:released(...)
+	return self.__baton:released(...)
+end
+
+local Callbacks = {}
+
+function Callbacks:pre_update(dt)
+	self.__baton:update(dt)
+end
+
+InputService.__callbacks = Callbacks
 
 return InputService

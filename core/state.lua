@@ -1,9 +1,7 @@
 -- creating locals for luajit performance
-local table_insert = table.insert
-local table_remove = table.remove
-local getmetatable = getmetatable
-local setmetatable = setmetatable
-local ipairs = ipairs
+local table_insert, table_remove = table.insert, table.remove
+local getmetatable, setmetatable = getmetatable, setmetatable
+local pairs, ipairs = pairs, ipairs
 
 local state = {}
 
@@ -54,10 +52,10 @@ function state.action(name, ...)
 		if services_mt and services_mt.__callbacks then
 			local callbacks = getmetatable(service).__callbacks
 			if (callbacks["pre_" .. name]) then
-				callbacks["pre_" .. name](...)
+				callbacks["pre_" .. name](service, ...)
 			end
 			if callbacks["pre_action"] then
-				callbacks["pre_action"](...)
+				callbacks["pre_action"](service, ...)
 			end
 		end
 	end
@@ -69,10 +67,10 @@ function state.action(name, ...)
 		if services_mt and services_mt.__callbacks then
 			local callbacks = getmetatable(service).__callbacks
 			if callbacks["post_" .. name] then
-				callbacks["post_" .. name](...)
+				callbacks["post_" .. name](service, ...)
 			end
 			if callbacks["post_action"] then
-				callbacks["post_action"](...)
+				callbacks["post_action"](service, ...)
 			end
 		end
 	end

@@ -1,6 +1,6 @@
 local InputService = require "core.service.input"
 local AssetService = require "core.service.asset"
-local BattleScene = extends "game.base-scene"
+local BattleScene = extends "game.scene.base"
 
 function BattleScene:__name()
 	return "Battle Scene"
@@ -26,7 +26,7 @@ function BattleScene:update(dt)
 end
 
 function BattleScene:draw()
-	self.asset_service.image("image", "dawnblocker", "brick", "lg", "1"):draw()
+	self.asset_service:image("image", "dawnblocker", "brick", "lg", "1"):draw()
 end
 
 return BattleScene
