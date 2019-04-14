@@ -11,4 +11,7 @@ for _, callback in ipairs(require "core.callbacks") do
 	end
 end
 
+function Scene:destruct()
+end
+
 return Scene
