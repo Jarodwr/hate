@@ -5,7 +5,7 @@ local function InputService(mapping)
 	--Return an initializer function that is set to the new button mapping
 	return function()
 		local baton_instance = baton.new(mapping)
-		return "input", setmetatable(
+		return setmetatable(
 			{
 				get = function(...)
 					return baton_instance:get(...)
@@ -22,7 +22,7 @@ local function InputService(mapping)
 			},
 			{
 				__callbacks = {
-					update = function(dt)
+					pre_update = function(dt)
 						baton_instance:update(dt)
 					end
 				}

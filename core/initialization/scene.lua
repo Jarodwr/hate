@@ -1,6 +1,8 @@
+local state = require "core.state"
+
 -- Wrapping code to ensure that scene objects are correctly run 
 -- without interfering with other callback handling functionality.
-hate.state.push(require(config.scene.entry))
+state.push(require(config.scene.entry))
 
 for _, callback in ipairs(require("core.callbacks")) do
 	-- Save the old callback so we don't completely overwrite it
@@ -13,7 +15,7 @@ for _, callback in ipairs(require("core.callbacks")) do
 	else
 		-- Just create a callback that calls the new state
 		love[callback] = function(...)
-			hate.state.action(callback, ...)
+			state.action(callback, ...)
 		end
 	end
 end

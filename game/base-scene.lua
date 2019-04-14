@@ -1,6 +1,6 @@
-local TimerService = require "game.services.timer"
-local TweenService = require "game.services.tween"
-local AssetService = require "game.services.asset"
+local TimerService = require "core.service.timer"
+local TweenService = require "core.service.tween"
+local AssetService = require "core.service.asset"
 
 local DefaultScene = extends "core.scene"
 
@@ -9,9 +9,9 @@ function DefaultScene:__name()
 end
 
 DefaultScene.services = {
-	TimerService,
-	TweenService,
-	AssetService
+	[TimerService] = {},
+	[TweenService] = {},
+	[AssetService] = {}
 }
 
 return DefaultScene

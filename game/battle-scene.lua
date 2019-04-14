@@ -1,5 +1,5 @@
-local InputService = require "game.services.input"
-
+local InputService = require "core.service.input"
+local AssetService = require "core.service.asset"
 local BattleScene = extends "game.base-scene"
 
 function BattleScene:__name()
@@ -7,7 +7,7 @@ function BattleScene:__name()
 end
 
 BattleScene.services = {
-	InputService {
+	[InputService] = {
 		controls = {
 			left = {"key:left", "key:a", "axis:leftx-", "button:dpleft"},
 			right = {"key:right", "key:d", "axis:leftx+", "button:dpright"},
@@ -19,13 +19,14 @@ BattleScene.services = {
 }
 
 function BattleScene:new()
+	self.asset_service = inject(AssetService)
 end
 
 function BattleScene:update(dt)
 end
 
 function BattleScene:draw()
-	hate.asset.image("image", "dawnblocker", "brick", "lg", "1"):draw()
+	self.asset_service.image("image", "dawnblocker", "brick", "lg", "1"):draw()
 end
 
 return BattleScene

@@ -3,14 +3,14 @@ local flux = library "flux"
 local function TweenService()
 	local group = flux.group()
 
-	return "tween", setmetatable(
+	return setmetatable(
 		{},
 		{
 			__call = function(self, ...)
 				return group:to(...)
 			end,
 			__callbacks = {
-				update = function(dt)
+				pre_update = function(dt)
 					group:update(dt)
 				end
 			}

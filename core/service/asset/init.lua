@@ -24,7 +24,7 @@ local function AssetService()
 		return asset
 	end
 
-	return "asset", {
+	return {
 		image = function(...)
 			local asset = manager
 			for _, path in ipairs {...} do

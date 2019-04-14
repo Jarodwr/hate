@@ -1,4 +1,4 @@
 local function PhysicsService()
-	return "physics", {}
+	return {}
 end
 return PhysicsService
