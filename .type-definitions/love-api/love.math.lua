@@ -199,12 +199,11 @@ function Transform:scale(sx, sy) end
 ---@param e1_1 number @The first column of the first row of the matrix.
 ---@param e1_2 number @The second column of the first row of the matrix.
 ---@param ... number @Additional matrix elements.
----@param e4_4 number @The fourth column of the fourth row of the matrix.
 ---@return Transform
 ---@overload fun(layout:MatrixLayout, e1_1:number, e1_2:number, ...:number, e4_4:number):Transform
 ---@overload fun(layout:MatrixLayout, matrix:table):Transform
 ---@overload fun(layout:MatrixLayout, matrix:table):Transform
-function Transform:setMatrix(e1_1, e1_2, ..., e4_4) end
+function Transform:setMatrix(e1_1, e1_2, ...) end
 
 ---Resets the Transform to the specified transformation parameters.
 ---@param x number @The position of the Transform on the x-axis.

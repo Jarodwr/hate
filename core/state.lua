@@ -117,4 +117,8 @@ function state.reset(scene)
 	__stacks = {default = {initialize(scene)}}
 end
 
+function state.get()
+	return __stack[#__stack]
+end
+
 return state

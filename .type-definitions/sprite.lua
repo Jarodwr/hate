@@ -1,6 +1,7 @@
 ---@class Sprite
 local class = {}
 
+---@public
 ---@overload fun(transform:Transform):void
 ---@param x number @The position to draw the object (x-axis).
 ---@param y number @The position to draw the object (y-axis).
