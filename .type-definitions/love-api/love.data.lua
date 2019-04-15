@@ -37,7 +37,7 @@ HashFunction = {
 ---@param rawstring string @The raw (un-compressed) string to compress.
 ---@param level number @The level of compression to use, between 0 and 9. -1 indicates the default level. The meaning of this argument depends on the compression format being used.
 ---@return CompressedData or string
----@overload fun(container:ContainerType, format:CompressedDataFormat, data:Data, level:number):CompressedData or string
+---@overload fun(container:ContainerType, format:CompressedDataFormat, data:Data, level:number):CompressedData | string
 function m.compress(container, format, rawstring, level) end
 
 ---Decode Data or a string from any of the EncodeFormats to Data or string.
