@@ -12,6 +12,7 @@ function love.conf(settings)
 	settings.externalstorage = config["love"]["externalstorage"]
 	settings.gammacorrect = config["love"]["gammacorrect"]
 	settings.identity = config["love"]["identity"]
+	
 	settings.audio = config["love.audio"]
 	settings.window = config["love.window"]
 	settings.modules = config["love.modules"]
