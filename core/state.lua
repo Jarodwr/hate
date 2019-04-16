@@ -117,8 +117,10 @@ function state.reset(scene)
 	__stacks = {default = {initialize(scene)}}
 end
 
+---@return Scene, Service[]
 function state.get()
-	return __stack[#__stack]
+	local current = __stack[#__stack]
+	return current, __services[current]
 end
 
 return state

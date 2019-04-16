@@ -13,7 +13,7 @@ end
 ---@param vars table
 ---@return Tween
 function TweenService:tween(obj, time, vars)
-	return self.__group:to(...)
+	return self.__group:to(obj, time, vars)
 end
 
 local Callbacks = {}

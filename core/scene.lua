@@ -1,3 +1,4 @@
+
 local Scene = extends "object"
 
 function Scene:__name()
@@ -5,6 +6,9 @@ function Scene:__name()
 end
 
 Scene.services = {}
+
+local SceneTools = require "core.scene-tools"
+Scene.__tools = SceneTools
 
 for _, callback in ipairs(require "core.callbacks") do
 	Scene[callback] = function()

@@ -2,5 +2,8 @@
     "editor.tabSize": 2,
     "editor.insertSpaces": false,
 		"editor.detectIndentation": false,
-		"editor.defaultFormatter": "trixnz.vscode-lua"
+		"editor.defaultFormatter": "trixnz.vscode-lua",
+		"coloredRegions.namedColors": {
+			"tools": "rgba(247, 202, 24, 0.15)"
+		}
 }

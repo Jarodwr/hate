@@ -2,7 +2,9 @@ local state = require "core.state"
 
 -- Wrapping code to ensure that scene objects are correctly run 
 -- without interfering with other callback handling functionality.
-state.push(require(config.scene.entry))
+function love.load(tbl)
+	state.push(require(config.scene.entry))
+end
 
 for _, callback in ipairs(require("core.callbacks")) do
 	-- Save the old callback so we don't completely overwrite it
