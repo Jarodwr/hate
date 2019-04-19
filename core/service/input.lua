@@ -2,6 +2,8 @@ local baton = library "baton"
 ---@class InputService
 local InputService = extends "object"
 
+InputService.__alias = "Input"
+
 ---@private
 function InputService:new(mapping)
 	self.__baton = baton.new(mapping)

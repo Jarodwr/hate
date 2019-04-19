@@ -3,6 +3,8 @@ local tick = library "tick"
 ---@class TimerService
 local TimerService = extends "object"
 
+TimerService.__alias = "Timers"
+
 ---@private
 function TimerService:new()
 	self.__group = tick.group()

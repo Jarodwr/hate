@@ -3,6 +3,8 @@ local bf = library "breezefield"
 ---@class PhysicsService
 local PhysicsService = extends "object"
 
+PhysicsService.__alias = "Physics"
+
 ---@private
 function PhysicsService:new()
 	self.__world = bf.newWorld(0, 90.81, true)

@@ -3,6 +3,8 @@ local flux = library "flux"
 ---@class TweenService
 local TweenService = extends "object"
 
+TweenService.__alias = "Tweens"
+
 ---@private
 function TweenService:new()
 	self.__group = flux.group()

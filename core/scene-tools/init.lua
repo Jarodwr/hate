@@ -1,11 +1,15 @@
 local ObjectExplorer = require "core.scene-tools.object-explorer"
 local ShortcutsWindow = require "core.scene-tools.shortcuts"
+local ServiceMenuItems = require "core.scene-tools.service-menu-items"
 
 local SceneTools = extends "core.tool"
 
+local imgui = imgui
+
 function SceneTools:new()
+	self.service_menu_items = ServiceMenuItems()
+
 	self.show_object_explorer = true
-	self.show_service_explorer = false
 	self.show_shortcuts = true
 
 	self.object_explorer = ObjectExplorer(self:ref())
@@ -29,9 +33,7 @@ function SceneTools:draw()
 			if imgui.MenuItem "Object Explorer" then
 				self.show_object_explorer = not self.show_object_explorer
 			end
-			if imgui.MenuItem "Service Explorer" then
-				self.show_service_explorer = not self.show_service_explorer
-			end
+			self.service_menu_items:draw()
 			imgui.EndMenu "Window"
 		end
 

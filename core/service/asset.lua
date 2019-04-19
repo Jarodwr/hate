@@ -8,6 +8,8 @@ local ipairs, assert = ipairs, assert
 ---@class AssetService
 local AssetService = extends "object"
 
+AssetService.__alias = "Assets"
+
 ---@private
 function AssetService:new()
 	self.__manager = cargo.init {

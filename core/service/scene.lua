@@ -3,6 +3,8 @@ local state = require "core.state"
 ---@class SceneService
 local SceneService = extends "object"
 
+SceneService.__alias = "Scenes"
+
 ---@private
 function SceneService:__error_on_overqueuing()
 	assert(
