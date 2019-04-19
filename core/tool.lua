@@ -18,6 +18,15 @@ function Tool:initialized()
 	return self.__initialized
 end
 
+function Tool:toggle_visibility()
+	self.__visible = not self.__visible
+end
+
+---@param value boolean
+function Tool:set_visibility(value)
+	self.__visible = value
+end
+
 -- Getter for the reference to the object
 function Tool:ref()
 	return self.__ref

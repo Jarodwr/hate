@@ -44,6 +44,9 @@ function state.service(class_type)
 end
 
 function state.action(name, ...)
+	local pre_action = "pre_" .. name
+	local post_action = "post_" .. name
+
 	local current = __stack[#__stack]
 
 	-- Call everything in the services
@@ -51,11 +54,11 @@ function state.action(name, ...)
 		local services_mt = getmetatable(service)
 		if services_mt and services_mt.__callbacks then
 			local callbacks = getmetatable(service).__callbacks
-			if (callbacks["pre_" .. name]) then
-				callbacks["pre_" .. name](service, ...)
-			end
 			if callbacks["pre_action"] then
 				callbacks["pre_action"](service, ...)
+			end
+			if (callbacks[pre_action]) then
+				callbacks[pre_action](service, ...)
 			end
 		end
 	end
@@ -66,8 +69,8 @@ function state.action(name, ...)
 		local services_mt = getmetatable(service)
 		if services_mt and services_mt.__callbacks then
 			local callbacks = getmetatable(service).__callbacks
-			if callbacks["post_" .. name] then
-				callbacks["post_" .. name](service, ...)
+			if callbacks[post_action] then
+				callbacks[post_action](service, ...)
 			end
 			if callbacks["post_action"] then
 				callbacks["post_action"](service, ...)

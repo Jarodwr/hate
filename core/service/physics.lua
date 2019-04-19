@@ -10,6 +10,10 @@ end
 
 local Callbacks = {}
 
+function Callbacks:pre_update(dt)
+	self.__world:update(dt)
+end
+
 function Callbacks:destruct()
 	-- Make sure the box2d instance is destroyed to allow physics related
 	-- stuff from being garbage collected
