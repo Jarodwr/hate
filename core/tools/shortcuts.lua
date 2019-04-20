@@ -1,5 +1,5 @@
 ---@class ShortcutsWindow : Object
-local ShortcutsWindow = extends "object"
+local ShortcutsWindow = extends "core.tool"
 
 ShortcutsWindow.name = "Shortcuts"
 

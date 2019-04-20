@@ -17,9 +17,11 @@ function ObjectExplorer:__expand_node(name, value)
 			value.__tools = value.__tools(value)
 		end
 		-- Don't show on object explorer if this tool is explicitly hidden
-		if value.__tools:hidden() then
-			return
-		end
+	end
+
+	--skip rendering this node
+	if value.__hidden then
+		return
 	end
 
 	if imgui.TreeNode(name .. ": " .. tostring(value)) then

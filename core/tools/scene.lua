@@ -10,7 +10,7 @@ local imgui = imgui
 function SceneTools:new()
 	self.service_menu_items = ServiceMenuItems()
 
-	self.show_shortcuts = true
+	self.show_demo_window = false
 
 	self.object_explorer = ObjectExplorer(self:ref())
 	self.shortcuts = ShortcutsWindow()
@@ -41,7 +41,10 @@ function SceneTools:draw()
 
 		if imgui.BeginMenu "Help" then
 			if imgui.MenuItem "Shortcuts" then
-				self.show_shortcuts = not self.show_shortcuts
+				-- self.show_shortcuts = not self.show_shortcuts
+			end
+			if imgui.MenuItem "Demo Window" then
+				self.show_demo_window = not self.show_demo_window
 			end
 			imgui.EndMenu "Help"
 		end
@@ -55,11 +58,12 @@ function SceneTools:draw()
 
 	self.service_menu_items:draw()
 
-	if self.show_shortcuts then
-		self.shortcuts:draw()
+	-- if self.show_shortcuts then
+	-- 	self.shortcuts:draw()
+	-- end
+	if self.show_demo_window then
+		imgui.ShowDemoWindow(true)
 	end
-
-	imgui.ShowDemoWindow(true)
 end
 
 return SceneTools

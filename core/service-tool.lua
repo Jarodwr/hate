@@ -1,10 +1,15 @@
 ---@class ServiceTool : HiddenTool
-local ServiceTool = extends "core.hidden-tool"
+local ServiceTool = extends "core.tool"
 
 ---@public
 ---@return string
 function ServiceTool:friendly_name()
-	return "service alias undefined"
+	log.warn("service doesn't have a friendly name, will not be able to access this service's tools")
+	return nil
+end
+
+function ServiceTool:hidden()
+	return true
 end
 
 return ServiceTool

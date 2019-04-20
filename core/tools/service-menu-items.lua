@@ -14,7 +14,9 @@ function ServiceMenuItems:new()
 			if not service.__tools:initialized() then
 				service.__tools = service.__tools(service)
 			end
-			table_insert(self.services, service.__tools)
+			if service.__tools:friendly_name() ~= nil then
+				table_insert(self.services, service.__tools)
+			end
 		end
 	end
 end
