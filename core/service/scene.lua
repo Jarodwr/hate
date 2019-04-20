@@ -73,6 +73,4 @@ end
 ---@private
 SceneService.__callbacks = Callbacks
 
-SceneService.__tools = require "core.tools.service.scene"
-
 return SceneService

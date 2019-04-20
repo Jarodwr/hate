@@ -24,7 +24,5 @@ end
 
 ---@private
 TweenService.__callbacks = Callbacks
----@private
-TweenService.__tools = require "core.tools.service.tween"
 
 return TweenService

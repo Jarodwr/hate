@@ -41,6 +41,4 @@ function AssetService:audio(...)
 	return asset
 end
 
-AssetService.__tools = require "core.tools.service.asset"
-
 return AssetService

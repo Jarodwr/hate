@@ -23,6 +23,4 @@ end
 ---@private
 PhysicsService.__callbacks = Callbacks
 
-PhysicsService.__tools = require "core.tools.service.physics"
-
 return PhysicsService

@@ -38,7 +38,5 @@ end
 
 ---@private
 InputService.__callbacks = Callbacks
----@private
-InputService.__tools = require "core.tools.service.input"
 
 return InputService

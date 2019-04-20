@@ -31,6 +31,4 @@ end
 ---@private
 TimerService.__callbacks = Callbacks
 
-TimerService.__tools = require "core.tools.service.timer"
-
 return TimerService
