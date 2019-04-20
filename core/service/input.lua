@@ -1,8 +1,6 @@
 local baton = library "baton"
 ---@class InputService
-local InputService = extends "object"
-
-InputService.__alias = "Input"
+local InputService = extends "core.service"
 
 ---@private
 function InputService:new(mapping)
@@ -40,5 +38,7 @@ end
 
 ---@private
 InputService.__callbacks = Callbacks
+---@private
+InputService.__tools = require "core.tools.service.input"
 
 return InputService

@@ -1,4 +1,4 @@
-
+---@class Scene : Object
 local Scene = extends "object"
 
 function Scene:__name()
@@ -7,7 +7,7 @@ end
 
 Scene.services = {}
 
-local SceneTools = require "core.scene-tools"
+local SceneTools = require "core.tools.scene"
 Scene.__tools = SceneTools
 
 for _, callback in ipairs(require "core.callbacks") do

@@ -1,9 +1,7 @@
 local state = require "core.state"
 
 ---@class SceneService
-local SceneService = extends "object"
-
-SceneService.__alias = "Scenes"
+local SceneService = extends "core.service"
 
 ---@private
 function SceneService:__error_on_overqueuing()
@@ -74,5 +72,7 @@ end
 
 ---@private
 SceneService.__callbacks = Callbacks
+
+SceneService.__tools = require "core.tools.service.scene"
 
 return SceneService

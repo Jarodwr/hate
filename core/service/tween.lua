@@ -1,9 +1,7 @@
 local flux = library "flux"
 
 ---@class TweenService
-local TweenService = extends "object"
-
-TweenService.__alias = "Tweens"
+local TweenService = extends "core.service"
 
 ---@private
 function TweenService:new()
@@ -26,5 +24,7 @@ end
 
 ---@private
 TweenService.__callbacks = Callbacks
+---@private
+TweenService.__tools = require "core.tools.service.tween"
 
 return TweenService

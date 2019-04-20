@@ -1,9 +1,7 @@
 local tick = library "tick"
 
 ---@class TimerService
-local TimerService = extends "object"
-
-TimerService.__alias = "Timers"
+local TimerService = extends "core.service"
 
 ---@private
 function TimerService:new()
@@ -16,7 +14,6 @@ end
 function TimerService:delay(fn, delay)
 	return self.__group:delay(fn, delay)
 end
-
 
 ---@param fn fun():void
 ---@param delay number
@@ -33,5 +30,7 @@ end
 
 ---@private
 TimerService.__callbacks = Callbacks
+
+TimerService.__tools = require "core.tools.service.timer"
 
 return TimerService

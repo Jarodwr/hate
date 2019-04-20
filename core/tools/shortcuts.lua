@@ -1,3 +1,4 @@
+---@class ShortcutsWindow : Object
 local ShortcutsWindow = extends "object"
 
 ShortcutsWindow.name = "Shortcuts"

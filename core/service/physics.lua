@@ -1,9 +1,7 @@
 local bf = library "breezefield"
 
 ---@class PhysicsService
-local PhysicsService = extends "object"
-
-PhysicsService.__alias = "Physics"
+local PhysicsService = extends "core.service"
 
 ---@private
 function PhysicsService:new()
@@ -24,5 +22,7 @@ end
 
 ---@private
 PhysicsService.__callbacks = Callbacks
+
+PhysicsService.__tools = require "core.tools.service.physics"
 
 return PhysicsService

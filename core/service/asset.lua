@@ -6,13 +6,12 @@ local image_loader = require(cd .. "loader.image")
 local ipairs, assert = ipairs, assert
 
 ---@class AssetService
-local AssetService = extends "object"
-
-AssetService.__alias = "Assets"
+local AssetService = extends "core.service"
 
 ---@private
 function AssetService:new()
-	self.__manager = cargo.init {
+	self.__manager =
+		cargo.init {
 		dir = "asset",
 		loaders = {
 			jpg = image_loader,
@@ -41,5 +40,7 @@ function AssetService:audio(...)
 	end
 	return asset
 end
+
+AssetService.__tools = require "core.tools.service.asset"
 
 return AssetService

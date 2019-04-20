@@ -1,15 +1,15 @@
-local ObjectExplorer = require "core.scene-tools.object-explorer"
-local ShortcutsWindow = require "core.scene-tools.shortcuts"
-local ServiceMenuItems = require "core.scene-tools.service-menu-items"
-
+---@class SceneTools : Tool
 local SceneTools = extends "core.tool"
+
+local ObjectExplorer = require "core.tools.object-explorer"
+local ShortcutsWindow = require "core.tools.shortcuts"
+local ServiceMenuItems = require "core.tools.service-menu-items"
 
 local imgui = imgui
 
 function SceneTools:new()
 	self.service_menu_items = ServiceMenuItems()
 
-	self.show_object_explorer = true
 	self.show_shortcuts = true
 
 	self.object_explorer = ObjectExplorer(self:ref())
@@ -19,7 +19,6 @@ end
 function SceneTools:draw()
 	-- Menu
 	if imgui.BeginMainMenuBar() then
-
 		if imgui.BeginMenu "File" then
 			imgui.MenuItem "Load"
 			imgui.EndMenu "File"
@@ -30,10 +29,13 @@ function SceneTools:draw()
 		end
 
 		if imgui.BeginMenu "Window" then
-			if imgui.MenuItem "Object Explorer" then
-				self.show_object_explorer = not self.show_object_explorer
+			if imgui.MenuItem("Object Explorer", "", self.object_explorer:get_window_visibility()) then
+				self.object_explorer:toggle_window()
 			end
-			self.service_menu_items:draw()
+			if imgui.BeginMenu "Services" then
+				self.service_menu_items:menu_items()
+				imgui.EndMenu()
+			end
 			imgui.EndMenu "Window"
 		end
 
@@ -47,9 +49,11 @@ function SceneTools:draw()
 		imgui.EndMainMenuBar()
 	end
 
-	if self.show_object_explorer then
+	if self.object_explorer:get_window_visibility() then
 		self.object_explorer:draw()
 	end
+
+	self.service_menu_items:draw()
 
 	if self.show_shortcuts then
 		self.shortcuts:draw()

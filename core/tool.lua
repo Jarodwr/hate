@@ -1,6 +1,8 @@
----@class Tool Abstract tools class for drawing and initializing imgui tools
+---@class Tool : Object Abstract tools class for drawing and initializing imgui tools
 local Tool = extends "object"
 
+---@generic T
+---@param ref T @This is a reference to the object that the tool is attached to, access with self:ref() for convenience
 function Tool:__call(ref)
   local obj = setmetatable({}, self)
 	-- Tool is initialized
@@ -8,7 +10,7 @@ function Tool:__call(ref)
 	-- Reference to this object
 	obj.__ref = ref
 	-- Window for this object is visible
-	obj.__visible = false
+	obj.__window_visibility = false
 	obj:new()
   return obj
 end
@@ -18,13 +20,20 @@ function Tool:initialized()
 	return self.__initialized
 end
 
-function Tool:toggle_visibility()
-	self.__visible = not self.__visible
+---@return boolean The current visibility status of the window
+function Tool:get_window_visibility()
+	return self.__window_visibility
+end
+
+---@return boolean The current visibility status of the window
+function Tool:toggle_window()
+	self.__window_visibility = not self.__window_visibility
+	return self.__window_visibility
 end
 
 ---@param value boolean
-function Tool:set_visibility(value)
-	self.__visible = value
+function Tool:set_window_visibility(value)
+	self.__window_visibility = value
 end
 
 -- Getter for the reference to the object
@@ -33,8 +42,14 @@ function Tool:ref()
 end
 
 -- imgui draw function, draw the tools
+---@return void
 function Tool:draw()
 	error "NYI"
+end
+
+---@return boolean
+function Tool:hidden()
+	return false
 end
 
 return Tool
