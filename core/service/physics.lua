@@ -20,7 +20,8 @@ function Callbacks:destruct()
 	self.__world._physworld:destroy()
 end
 
----@private
-PhysicsService.__callbacks = Callbacks
+function PhysicsService:get_callbacks()
+	return Callbacks
+end
 
 return PhysicsService

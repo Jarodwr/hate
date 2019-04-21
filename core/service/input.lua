@@ -36,7 +36,8 @@ function Callbacks:pre_update(dt)
 	self.__baton:update(dt)
 end
 
----@private
-InputService.__callbacks = Callbacks
+function InputService:get_callbacks()
+	return Callbacks
+end
 
 return InputService

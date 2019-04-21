@@ -70,7 +70,8 @@ function Callbacks:post_action()
 	end
 end
 
----@private
-SceneService.__callbacks = Callbacks
+function SceneService:get_callbacks()
+	return Callbacks
+end
 
 return SceneService

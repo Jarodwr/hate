@@ -28,7 +28,8 @@ function Callbacks:pre_update(dt)
 	return self.__group:update(dt)
 end
 
----@private
-TimerService.__callbacks = Callbacks
+function TimerService:get_callbacks()
+	return Callbacks
+end
 
 return TimerService

@@ -1,6 +1,7 @@
+local BattleScene = extends "game.base-scene"
+
 local InputService = require "core.service.input"
 local AssetService = require "core.service.asset"
-local BattleScene = extends "game.scene.base"
 
 function BattleScene:__name()
 	return "Battle Scene"

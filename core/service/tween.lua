@@ -22,7 +22,8 @@ function Callbacks:pre_update(dt)
 	self.__group:update(dt)
 end
 
----@private
-TweenService.__callbacks = Callbacks
+function TweenService:get_callbacks()
+	return Callbacks
+end
 
 return TweenService

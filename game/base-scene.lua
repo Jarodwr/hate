@@ -6,7 +6,7 @@ local AssetService = require "core.service.asset"
 local DefaultScene = extends "core.scene"
 
 function DefaultScene:__name()
-	return "Default Scene"
+	error "NYI"
 end
 
 DefaultScene.services = {

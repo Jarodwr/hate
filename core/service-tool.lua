@@ -4,7 +4,7 @@ local ServiceTool = extends "core.tool"
 ---@public
 ---@return string
 function ServiceTool:friendly_name()
-	log.warn("service doesn't have a friendly name, will not be able to access this service's tools")
+	log.warn "service doesn't have a friendly name, will not be able to access this service's tools"
 	return nil
 end
 

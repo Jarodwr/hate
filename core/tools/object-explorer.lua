@@ -1,39 +1,38 @@
 ---@class ObjectExplorer : Object
 local ObjectExplorer = extends "core.tool"
 
+local utils = require "core.utils"
 local imgui, pairs, tostring, type, getmetatable = imgui, pairs, tostring, type, getmetatable
 
 ObjectExplorer.title = "Object Explorer"
 
+---@param object any
 function ObjectExplorer:new(object)
 	self.super.new(self, object)
 end
 
 ---@private
+---@param name string @name of the variable
+---@param value any @value of the variable
+---@return void
 function ObjectExplorer:__expand_node(name, value)
-	if value.__tools then
-			-- Initialize the tools if they haven't been created yet
-		if not value.__tools:initialized() then
-			value.__tools = value.__tools(value)
-		end
-		-- Don't show on object explorer if this tool is explicitly hidden
-	end
+	local tools = utils.get_tools(value)
 
 	--skip rendering this node
-	if value.__hidden then
+	if utils.is_tool_hidden(value) then
 		return
 	end
 
 	if imgui.TreeNode(name .. ": " .. tostring(value)) then
-		if value.__tools then
+		if tools ~= nil then
 			-- Toggle the visibility with a tools button
 			if imgui.Button "tools" then
-				value.__tools:toggle_window()
+				tools:toggle_window()
 			end
 			-- Draw a window to render the tools if they are available
-			if value.__tools.__window_visibility then
+			if tools:get_window_visibility() then
 				imgui.Begin(name .. ": tools")
-				value.__tools:draw()
+				tools:draw()
 				imgui.End()
 			end
 		end
@@ -58,10 +57,13 @@ function ObjectExplorer:__expand_node(name, value)
 	end
 end
 
+---@return void
 function ObjectExplorer:draw()
 	imgui.Begin(self.title)
 	for child_name, child_value in pairs(self:ref()) do
-		self:__expand_node(child_name, child_value)
+		if not child_name == "__tools" then
+			self:__expand_node(child_name, child_value)
+		end
 	end
 	imgui.End()
 end

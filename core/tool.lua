@@ -4,7 +4,7 @@ local Tool = extends "object"
 ---@generic T
 ---@param ref T @This is a reference to the object that the tool is attached to, access with self:ref() for convenience
 function Tool:__call(ref)
-  local obj = setmetatable({}, self)
+	local obj = setmetatable({}, self)
 	-- Tool is initialized
 	obj.__initialized = true
 	-- Reference to this object

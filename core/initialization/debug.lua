@@ -5,6 +5,7 @@ if config.debug then
 	-- #region [rgba(22, 160, 133, 0.2)]
 	-- Initialize imgui, we use this to draw all of our tools
 	require "imgui"
+	local imgui = imgui
 	local state = require "core.state"
 	-- Initialize the tools state
 	-- local tools_state = {windows = require("tools.window")()}
@@ -20,16 +21,16 @@ if config.debug then
 	----------------------------
 	-- Wrapped LOVE callbacks --
 	----------------------------
-	function love.update(dt)
-		main.update(dt)
-		if visible then
-			imgui.NewFrame()
-		end
-	end
+	-- function love.update(dt)
+	-- 	main.update(dt)
+	-- 	if visible then
+	-- 	end
+	-- end
 
 	function love.draw()
 		main.draw()
 		if visible then
+			imgui.NewFrame()
 			local scene = state.get()
 			if not scene.__tools:initialized() then
 				scene.__tools = scene.__tools(scene)

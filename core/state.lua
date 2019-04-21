@@ -10,7 +10,6 @@ local __services = {}
 -- Internally used to initialize new scenes properly
 local function initialize(class)
 	local services = {}
-
 	--initialize services
 	local scene_class = class
 	--Initialize all of the services in base classes as well
@@ -44,37 +43,30 @@ function state.service(class_type)
 end
 
 function state.action(name, ...)
-	local pre_action = "pre_" .. name
-	local post_action = "post_" .. name
-
 	local current = __stack[#__stack]
 
 	-- Call everything in the services
+	local pre_action = "pre_" .. name
 	for _, service in ipairs(__services[current]) do
-		local services_mt = getmetatable(service)
-		if services_mt and services_mt.__callbacks then
-			local callbacks = getmetatable(service).__callbacks
-			if callbacks["pre_action"] then
-				callbacks["pre_action"](service, ...)
-			end
-			if (callbacks[pre_action]) then
-				callbacks[pre_action](service, ...)
-			end
+		local callbacks = service:get_callbacks()
+		if callbacks["pre_action"] then
+			callbacks["pre_action"](service, ...)
+		end
+		if (callbacks[pre_action]) then
+			callbacks[pre_action](service, ...)
 		end
 	end
 
 	current[name](current, name, ...) -- Send the action to the scene
 
+	local post_action = "post_" .. name
 	for _, service in ipairs(__services[current]) do
-		local services_mt = getmetatable(service)
-		if services_mt and services_mt.__callbacks then
-			local callbacks = getmetatable(service).__callbacks
-			if callbacks[post_action] then
-				callbacks[post_action](service, ...)
-			end
-			if callbacks["post_action"] then
-				callbacks["post_action"](service, ...)
-			end
+		local callbacks = service:get_callbacks()
+		if callbacks[post_action] then
+			callbacks[post_action](service, ...)
+		end
+		if callbacks["post_action"] then
+			callbacks["post_action"](service, ...)
 		end
 	end
 end
