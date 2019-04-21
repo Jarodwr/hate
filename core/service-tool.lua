@@ -8,8 +8,4 @@ function ServiceTool:friendly_name()
 	return nil
 end
 
-function ServiceTool:hidden()
-	return true
-end
-
 return ServiceTool

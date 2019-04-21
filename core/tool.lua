@@ -47,9 +47,4 @@ function Tool:draw()
 	error "NYI"
 end
 
----@return boolean
-function Tool:hidden()
-	return false
-end
-
 return Tool

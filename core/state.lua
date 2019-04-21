@@ -7,27 +7,6 @@ local state = {}
 
 local __services = {}
 
--- Internally used to initialize new scenes properly
-local function initialize(class)
-	local services = {}
-	--initialize services
-	local scene_class = class
-	--Initialize all of the services in base classes as well
-	while scene_class ~= nil do
-		for service_class, configuration in pairs(scene_class.services or {}) do
-			local service = service_class(configuration)
-			services[service_class] = service
-			-- Used for iteration
-			table_insert(services, service)
-		end
-		scene_class = getmetatable(scene_class)
-	end
-
-	local instance = setmetatable({}, class)
-	__services[instance] = services
-	return instance
-end
-
 -- Create a new stack when an undefined stack is requested
 local function create_stack(self, key)
 	self[key] = {}
@@ -73,9 +52,36 @@ end
 
 -- Push a state to the top of the current stack and initialize it
 function state.push(scene)
-	local instance = initialize(scene)
+	local services = {}
+	--initialize services
+	local scene_class = scene
+	--Initialize all of the services in base classes as well
+	while scene_class ~= nil do
+		for service_class, configuration in pairs(scene_class.services or {}) do
+			local service = service_class(configuration)
+			services[service_class] = service
+			-- Used for iteration
+			table_insert(services, service)
+		end
+		scene_class = getmetatable(scene_class)
+	end
+
+	local instance = setmetatable({}, scene)
+	__services[instance] = services
+
+	-- Insert the scene into the scene stack
 	table_insert(__stack, instance)
+
+	-- Construct the scene
 	instance:new()
+
+	-- Set off all of the on init events in the services so that we can actually inject services
+	for _, service in ipairs(services) do
+		local callbacks = service:get_callbacks()
+		if callbacks["on_init"] then
+			callbacks["on_init"](service)
+		end
+	end
 end
 
 -- Remove the state at the top of the state
@@ -95,9 +101,7 @@ end
 function state.stack(name, scene)
 	__stack = __stacks[name]
 	if scene then
-		local instance = initialize(scene)
-		table_insert(__stack, instance)
-		instance:new()
+		state.push(scene)
 	end
 end
 
@@ -109,7 +113,8 @@ function state.reset(scene)
 			state.pop()
 		end
 	end
-	__stacks = {default = {initialize(scene)}}
+	__stacks = {default = {}}
+	state.push(scene)
 end
 
 ---@return Scene, Service[]
