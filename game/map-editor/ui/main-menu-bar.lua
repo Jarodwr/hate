@@ -1,5 +1,7 @@
 local Menubar = extends "object"
 
+local MapService = require "game.map-editor.service.map"
+
 local FileService = require "game.map-editor.service.file"
 local EditService = require "game.map-editor.service.edit"
 local ViewService = require "game.map-editor.service.view"
@@ -10,6 +12,7 @@ function Menubar:new()
 	self.edit_service = inject(EditService)
 	self.view_service = inject(ViewService)
 	self.settings_service = inject(SettingsService)
+	self.map_service = inject(MapService)
 end
 
 function Menubar:draw()
@@ -50,10 +53,10 @@ function Menubar:draw()
 		end
 		if imgui.BeginMenu "Edit" then
 			if imgui.MenuItem("Undo", "ctrl+z") then
-				self.edit_service:undo()
+				self.map_service:undo()
 			end
 			if imgui.MenuItem("Redo", "ctrl+y") then
-				self.edit_service:redo()
+				self.map_service:redo()
 			end
 			imgui.Separator()
 			if imgui.MenuItem("Cut", "ctrl+x") then

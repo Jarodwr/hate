@@ -13,7 +13,7 @@ function ServiceMenuItems:new()
 	self.services = {}
 	for _, service in ipairs(services) do
 		local tools = utils.get_tools(service)
-		if tools ~= nil and tools:friendly_name() ~= nil then
+		if tools ~= nil and tools:alias() ~= nil then
 			table_insert(self.services, tools)
 		end
 	end
@@ -35,7 +35,7 @@ function ServiceMenuItems:menu_items()
 	else
 		for key, service in ipairs(self.services) do
 			local tools = utils.get_tools(service)
-			if imgui.MenuItem(tools:friendly_name(), "", tools:get_window_visibility()) then
+			if imgui.MenuItem(tools:alias(), "", tools:get_window_visibility()) then
 				tools:toggle_window()
 			end
 		end

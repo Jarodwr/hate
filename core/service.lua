@@ -1,7 +1,7 @@
 ---@class Service : Object
 local Service = extends "object"
 
-Service.__tools = require "core.service-tool"
+Service.__tools = require "core.tool"
 
 function Service:get_callbacks()
 	return {}

@@ -10,6 +10,7 @@ local FileService = require(cd .. "service.file")
 local EditService = require(cd .. "service.edit")
 local ViewService = require(cd .. "service.view")
 local WindowService = require(cd .. "service.window")
+local MapService = require(cd .. "service.map")
 local SettingsService = require(cd .. "service.settings")
 
 -- UI Elements
@@ -41,6 +42,7 @@ MapEditorScene.services = {
 	},
 	[LayoutService] = {},
 	[WindowService] = {},
+	[MapService] = {},
 	[FileService] = {},
 	[EditService] = {},
 	[ViewService] = {},

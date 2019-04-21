@@ -15,6 +15,12 @@ function Tool:__call(ref)
   return obj
 end
 
+
+function Tool:alias()
+	log.warn "service doesn't have a friendly name, will not be able to access this service's tools"
+	return nil
+end
+
 -- Check that the tool instance has been initialized
 function Tool:initialized()
 	return self.__initialized
