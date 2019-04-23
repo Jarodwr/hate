@@ -1,7 +1,9 @@
-local BattleScene = extends "game.base-scene"
+local Map = require "game.battle.map"
 
-local InputService = require "core.service.input"
 local AssetService = require "core.service.asset"
+local InputService = require "core.service.input"
+
+local BattleScene = extends "game.base-scene"
 
 function BattleScene:__name()
 	return "Battle Scene"
@@ -22,13 +24,15 @@ BattleScene.services = {
 function BattleScene:new()
 	self.asset_service = inject(AssetService)
 	self.input_service = inject(InputService)
+	self.map = Map(6, 3)
 end
 
 function BattleScene:update(dt)
 end
 
 function BattleScene:draw()
-	self.asset_service:image("image", "dawnblocker", "brick", "lg", "1"):draw()
+	self.map:draw()
+	-- self.asset_service:image("image", "dawnblocker", "brick", "lg", "1"):draw()
 end
 
 return BattleScene

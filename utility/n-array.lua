@@ -7,7 +7,7 @@
 local function recursive_generate(lengths, iteration)
 	local array = {}
 	local next_iteration = iteration + 1
-	local length = lengths[iteration]
+	local length = lengths[iteration] or 0
 	for i = 1, length do
 		array[i] = recursive_generate(lengths, next_iteration)
 	end
@@ -47,7 +47,7 @@ function n_array:set_aliases(aliases)
 	-- Generate the new coordinate metatable
 	self.__coordinate_mt = {
 		__index = function(self, index)
-			return rawget(self, self[aliases[index]])
+			return rawget(self, aliases[index])
 		end
 	}
 end
@@ -60,6 +60,8 @@ function n_array:each()
 		coordinate[i] = 1
 	end
 
+	coordinate[self.dimension_count] = 0
+
 	if self.__coordinate_mt then
 		setmetatable(coordinate, self.__coordinate_mt)
 	end
@@ -68,8 +70,8 @@ function n_array:each()
 		-- Work out if we've clocked over and need to conclude the iterator
 		local iterator_completed = true
 		-- Move to the next coordinate
-		for i = dimension_count, 1, -1 do
-			if coordinate[i] > lengths[i] then
+		for i = self.dimension_count, 1, -1 do
+			if coordinate[i] >= self.lengths[i] then
 				-- Clock over the iterator
 				coordinate[i] = 1
 			else
@@ -84,7 +86,7 @@ function n_array:each()
 		else
 			-- Get the current value
 			local value = self
-			for i = 1, dimension_count do
+			for i = 1, self.dimension_count do
 				value = value[coordinate[i]]
 			end
 
@@ -150,10 +152,12 @@ function n_array:fill(value)
 	end
 end
 
+local n_array_mt = {__index = n_array}
+
 -- Array generator
 return function(...)
 	local lengths = {...}
-	local array = setmetatable(recursive_generate(lengths, 1), n_array)
+	local array = setmetatable(recursive_generate(lengths, 1), n_array_mt)
 	array.lengths = lengths
 	array.dimension_count = #lengths
 	return array
